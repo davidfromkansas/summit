@@ -1,0 +1,12 @@
+.signUpForm {
+  height: 10vh; /* Magic here */
+  width: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  position: absolute;
+  padding: 100px;
+  opacity: 0.2;
+  z-index: 10;
+}
