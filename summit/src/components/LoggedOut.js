@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./LoggedOut.css";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import Logo from "../assets/summit_logo.svg";
+
+import Button from "@material-ui/core/Button";
 
 class LoggedOut extends Component {
   constructor(props) {
@@ -13,29 +16,45 @@ class LoggedOut extends Component {
   }
 
   showSignIn = () => {
-    this.setState({ showSignIn: !this.state.showSignIn });
-    this.setState({ showSignUp: false });
+    this.setState({ showSignIn: true });
+  };
+
+  closeSignIn = () => {
+    this.setState({ showSignIn: false });
   };
 
   showSignUp = () => {
-    this.setState({ showSignUp: !this.state.showSignUp });
-    this.setState({ showSignIn: false });
+    this.setState({ showSignUp: true });
+  };
+
+  closeSignUp = () => {
+    this.setState({ showSignUp: false });
   };
 
   render() {
     return (
-      <div id="loggedoutcontainer">
-        <h1>You Are Logged Out</h1>
-        {/* <div id="authButtons"> */}
-        {this.state.showSignIn ? <SignIn></SignIn> : null}
-        {this.state.showSignUp ? <SignUp></SignUp> : null}
+      <div>
+        <img src={Logo} height="25%" width="25%" />
+        <br />
+        <h1>Summit</h1>
+
+        {/* We should only render the sign-in / sign-out components on demand. 
+        This increases the efficiency of the React app imo -- DLT */}
+
+        {this.state.showSignIn ? (
+          <SignIn open={true} close={this.closeSignIn}></SignIn>
+        ) : null}
+        {this.state.showSignUp ? (
+          <SignUp open={true} close={this.closeSignUp}></SignUp>
+        ) : null}
+
+        <Button onClick={this.showSignIn}>Sign In</Button>
 
         <br />
 
-        <button onClick={this.showSignIn}>Sign In</button>
-        <br />
-        <button onClick={this.showSignUp}>Sign up</button>
-        {/* </div> */}
+        <Button variant="outlined" onClick={this.showSignUp}>
+          Sign up
+        </Button>
       </div>
     );
   }
